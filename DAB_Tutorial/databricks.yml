@@ -1,0 +1,32 @@
+
+bundle:
+  name: DAB_Tutorial
+  uuid: aeccc2cb-4500-47ee-9758-2ce3e12213af
+
+include:
+  - resources/*/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: dbc-0250789e-b9c2.cloud.databricks.com
+      root_path: /Workspace/Users/himanshu.bisht639@gmail.com/DEV/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - group_name: admins
+        level: CAN_MANAGE
+    presets:
+      name_prefix: ${workspace.current_user.short_name}
+      source_linked_deployment: false
+
+  prod:
+    mode: production
+    workspace:
+      host: dbc-0250789e-b9c2.cloud.databricks.com
+      root_path: /Workspace/Users/himanshu.bisht639@gmail.com/PROD/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: himanshu.bisht639@gmail.com
+        level: CAN_MANAGE
+      - group_name: admins
+        level:  CAN_RUN
